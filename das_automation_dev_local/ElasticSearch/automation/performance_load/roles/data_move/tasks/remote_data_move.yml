@@ -13,10 +13,10 @@
 - name: Copy Remote-To-Remote (from serverA to serverB)
   synchronize:
     mode: push 
-    src: rsync://"{{common_data_source_server}}"
+    src: "{{common_data_source_dir}}"
     dest: "{{common_destination_target_dir}}"
     verify_host: true
- 
+    delegate_to: "{{common_data_host_server}}" 
   become: true
   tags:   
   - remote_copy_target_files

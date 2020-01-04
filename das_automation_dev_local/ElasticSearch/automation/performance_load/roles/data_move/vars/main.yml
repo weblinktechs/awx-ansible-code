@@ -2,6 +2,6 @@
 # vars file for data_move
 common_data_path: /data01
 common_data_host_server: "192.168.0.90"
-common_data_source_dir: "azuredata01/avu-elserdn059/LPR126"
+common_data_source_dir: "/azuredata01/avu-elserdn059/LPR126"
 common_destination_target_dir: "{{common_data_path}}/payload_data"
 common_data_source_server: "{{common_data_host_server}}/{{common_data_source_dir}}/"
