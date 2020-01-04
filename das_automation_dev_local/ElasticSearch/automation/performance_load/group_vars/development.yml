@@ -1,0 +1,5 @@
+---
+## common Development Path
+common_data_path: /data01
+common_data_source_dir: "/azuredata01/avu-elserdn059/LPR126"
+common_destination_target_dir: "{{common_path}}/payload_data"

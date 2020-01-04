@@ -1,0 +1,17 @@
+---
+# tasks file for data_move
+
+- name: Create destination directory for target
+  file:
+    path: "{{common_destination_target_dir}}"
+    state: directory
+    mode: '0755'
+  become: true
+  tags:
+  - create_directories
+
+
+- name: Move data
+  include: remote_data_move.yml
+  tags:
+  - remote_move

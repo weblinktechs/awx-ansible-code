@@ -1,0 +1,5 @@
+---
+- hosts: logstash-servers
+  roles:
+  - data_move
+  tags : do_data_mode

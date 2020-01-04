@@ -1,0 +1,23 @@
+---
+# tasks file for data_move
+- name: Copy file from source server to All Logstash nodes
+  copy:
+    src: "{{common_data_source_dir}}"
+    dest: "{{common_destination_target_dir}}" 
+    mode: '0644'
+    remote_src: true
+  become: true
+  tags:
+  - copy_target_files
+
+- name: Copy Remote-To-Remote (from serverA to serverB)
+  synchronize:
+    mode: push 
+    src: rsync://"{{common_data_source_server}}"
+    dest: "{{common_destination_target_dir}}"
+    verify_host: true
+ 
+  become: true
+  tags:   
+  - remote_copy_target_files
+

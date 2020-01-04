@@ -1,0 +1,24 @@
+input {
+  file {
+    codec => multiline
+        {
+            pattern => '^\{'
+            negate => true
+            what => previous                
+        }
+    path => "{{}}"
+    start_position => "beginning"
+  }
+}
+filter {
+}
+output {
+   #elasticsearch {
+   #  codec => json
+   #  hosts => "http://localhost:9200"
+   #  index => "{{}}"
+   #  pipeline => "{{}}"
+  #}
+   stdout { codec => json }
+}
+

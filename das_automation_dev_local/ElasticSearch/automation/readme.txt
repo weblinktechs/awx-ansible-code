@@ -1,0 +1,1 @@
+Add all code related to elastic automation in this folder.
