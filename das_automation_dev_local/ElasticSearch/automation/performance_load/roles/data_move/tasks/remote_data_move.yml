@@ -25,7 +25,6 @@
   copy: 
     src: "{{common_data_source_dir}}"
     dest: "{{common_destination_target_dir}}"
-    remote_src: yes
   delegate_to: "{{target_machine}}" 
   become: true
   tags:   
