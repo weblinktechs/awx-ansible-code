@@ -1,5 +1,5 @@
 ---
-- hosts: "{{groups['logstash-servers'][2]}}"
+- hosts: "{{source}}"
   roles:
   - data_move
   tags : do_data_mode

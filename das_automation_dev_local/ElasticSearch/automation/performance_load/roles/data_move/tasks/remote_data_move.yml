@@ -18,8 +18,9 @@
     mode: pull 
     src: "{{common_data_source_dir}}"
     dest: "{{common_destination_target_dir}}"
-    verify_host: true
-  delegate_to: "{{groups['logstash-servers'][0]}}" 
+    verify_host: no
+    recursive: yes
+  delegate_to: "{{target}}}" 
   become: true
   tags:   
   - remote_copy_target_files
