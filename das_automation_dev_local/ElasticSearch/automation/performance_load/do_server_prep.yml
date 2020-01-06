@@ -1,0 +1,5 @@
+---
+- hosts: "all"
+  roles:
+  - data_prep_and_clean
+  tags : do_server_perp

@@ -1,0 +1,45 @@
+---
+# tasks file for data_move
+
+    # transfer local pub-key to remote authorized_keys
+    - name: fetch local ssh key from root user
+      shell: cat /root/.ssh/id_rsa.pub
+      register: ssh_keys
+      changed_when: false
+      become: true
+    - name: deploy ssh key to remote server
+      authorized_key:
+              user: "root"
+              key: "{{ item }}"
+      #delegate_to: "server-b"
+      become: true
+      with_items:
+              - "{{ ssh_keys.stdout }}"
+    # fetch remote host key and add to local known_hosts
+    # to omit key accept prompt
+    - name: fetch ssh rsa host key from remote server
+      shell: cat /etc/ssh/ssh_host_rsa_key.pub
+      register: ssh_host_rsa_key
+     # delegate_to: server-b
+      become: true
+      changed_when: false
+    - name: create /root/.ssh/ if not existant
+      file:
+          path: "/root/.ssh/"
+          owner: root
+          group: root
+          mode: 0700
+          state: directory
+      become: true
+    - name: Create destination directory for target
+      file:
+        path: "/root/.ssh/known_hosts"
+        state: touch
+        mode: '0755'
+      become: true
+    - name: add hostkey to root known host file
+      lineinfile:
+          path: "/root/.ssh/known_hosts"
+          line: "{{ inventory_hostname }} {{ ssh_host_rsa_key.stdout }}"
+          mode: 0600
+      become: true

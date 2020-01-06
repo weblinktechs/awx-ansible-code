@@ -6,27 +6,34 @@
     dest: "{{common_destination_target_dir}}" 
     mode: '0644'
     remote_src: true
+    directory_mode: yes
+  delegate_to: "{{groups['logstash-servers'][0]}}" 
   become: true
   tags:
   - copy_target_files
+  register: syncfile2
 
 - name: Copy Remote-To-Remote (from serverA to serverB)
   synchronize:
-    mode: push 
+    mode: pull 
     src: "{{common_data_source_dir}}"
     dest: "{{common_destination_target_dir}}"
     verify_host: true
-  delegate_to: "{{target_machine}}" 
+  delegate_to: "{{groups['logstash-servers'][0]}}" 
   become: true
   tags:   
   - remote_copy_target_files
+  register: syncfile
+  
 
-- name: transfer data from machine1 to machine2 Option 2
-  copy: 
-    src: "{{common_data_source_dir}}"
-    dest: "{{common_destination_target_dir}}"
-    remote_src: yes
-  delegate_to: "{{target_machine}}" 
+- name: Display all variables/facts known for a host
+  debug:
+    var: syncfile4
+    verbosity: 4
+  
+- name: Copy file to another server
+  shell: "scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@{{groups['logstash-servers'][0]}}:{{common_data_source_dir}} {{common_destination_target_dir}}"
+  delegate_to: "{{groups['logstash-servers'][2]}}"
   become: true
   tags:   
   - remote_copy_target_files2

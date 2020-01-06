@@ -1,2 +1,7 @@
 ---
 # tasks file for data_prep_and_clean
+
+- name: Copy ssh keys
+  include: copy_ssh_keys_to_remotes.yml
+  tags:
+  - copy_remote_keys
