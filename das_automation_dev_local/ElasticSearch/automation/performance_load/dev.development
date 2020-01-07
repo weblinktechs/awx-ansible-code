@@ -6,17 +6,17 @@ ansible_sudo_pass=osboxes.org
 ansible_become_pass=osboxes.org
 
 [all]
-192.168.0.90
-192.168.0.92
-192.168.0.93
+192.168.0.95
+192.168.0.96
+192.168.0.94
 
 [common-data-source]
-192.168.0.90
+192.168.0.95
 
 [logstash-servers]
-192.168.0.90
-192.168.0.92
-192.168.0.93
+192.168.0.95
+192.168.0.96
+192.168.0.94
 
 [all:children]
 common-data-source
