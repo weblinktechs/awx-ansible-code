@@ -8,7 +8,7 @@ ansible_become_pass=osboxes.org
 [all]
 192.168.0.95
 192.168.0.96
-192.168.0.94
+192.168.0.98
 
 [common-data-source]
 192.168.0.95
@@ -16,7 +16,7 @@ ansible_become_pass=osboxes.org
 [logstash-servers]
 192.168.0.95
 192.168.0.96
-192.168.0.94
+192.168.0.98
 
 [all:children]
 common-data-source

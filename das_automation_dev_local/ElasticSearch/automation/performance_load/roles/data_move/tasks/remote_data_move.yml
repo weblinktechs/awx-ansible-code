@@ -20,7 +20,7 @@
     dest: "{{common_destination_target_dir}}"
     verify_host: no
     recursive: yes
-  delegate_to: "{{target}}}" 
+  delegate_to: "{{targets}}" 
   become: true
   tags:   
   - remote_copy_target_files
