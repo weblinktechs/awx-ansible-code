@@ -1,23 +1,23 @@
-[ingest]
-172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+[all:vars]
+ansible_connection=ssh
+ansible_ssh_user=osboxes
+ansible_ssh_pass=osboxes.org
+ansible_sudo_pass=osboxes.org
+ansible_become_pass=osboxes.org
 
-[data]
-172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+[all]
+192.168.0.103
+192.168.0.101
+192.168.0.102
 
-[master]
-172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+[common-data-source]
+192.168.0.103
 
-[kibana]
-172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+[logstash-servers]
+192.168.0.103
+192.168.0.101
+192.168.0.102
 
-[logstash]
-172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
-
-#[beats]
-#172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
-
-#[rally]
-#172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
-
-[ml]
-172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+[all:children]
+common-data-source
+logstash-serversclear

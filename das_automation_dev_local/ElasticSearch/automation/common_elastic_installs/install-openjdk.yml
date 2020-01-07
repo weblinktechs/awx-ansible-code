@@ -1,16 +1,12 @@
 ---
 - hosts:
-  - master
-  - data
-  - ingest
-  - ml
-  - logstash
+  - all
   roles:
   - openjdk
   tasks:
   - name: Get Java version
     shell: java -version 2>&1
-    register: java_version
+    register: java_version 
 
   - name: Display Java version
     debug:
