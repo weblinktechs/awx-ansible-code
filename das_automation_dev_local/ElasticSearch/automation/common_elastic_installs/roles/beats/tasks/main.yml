@@ -1,0 +1,15 @@
+---
+- name: Install Filebeat
+  include: filebeat.yml
+  tags:
+  - filebeat
+
+- name: Install Metricebeat
+  include: metricbeat.yml
+  tags:
+  - metricbeat
+
+# - name: Include security.yml
+#   include: security.yml
+#   tags:
+#   - security

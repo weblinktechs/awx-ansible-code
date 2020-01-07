@@ -1,0 +1,22 @@
+---
+- name: Firewall settings
+  include: firewall.yml
+  tags:
+  - firewall
+
+- name: Elasticsearch installation
+  include: install.yml
+  tags:
+  - install
+
+- name: Elasticsearch configuration
+  include: config.yml
+  tags:
+  - config
+
+- name: Elasticsearch security settings
+  include: security.yml
+  tags:
+  - security
+ # - config
+  when: es_ssl | bool

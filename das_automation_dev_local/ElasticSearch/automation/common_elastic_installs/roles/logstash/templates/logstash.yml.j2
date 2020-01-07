@@ -1,0 +1,19 @@
+node.name: {{ ansible_fqdn }}
+path.data: {{ ls_data_path }}
+path.logs: {{ ls_log_path }}
+path.settings: {{ ls_settings_path }}
+config.reload.automatic: true
+http.host: 0.0.0.0
+http.port: 9600
+{% if es_xpack_monitoring | bool %}
+xpack.monitoring.enabled: {{ es_xpack_monitoring }}
+xpack.monitoring.elasticsearch.hosts:
+{{ output_es_hosts | to_nice_yaml | indent(2, true) }}
+{% if es_secure | bool %}
+xpack.monitoring.elasticsearch.username: {{ es_username }}
+xpack.monitoring.elasticsearch.password: {{ es_password }}
+{% if es_ssl | bool %}
+xpack.monitoring.elasticsearch.ssl.certificate_authority: {{ output_es_ssl_ca }}
+{% endif %}
+{% endif %}
+{% endif %}

@@ -1,0 +1,33 @@
+---
+- name: Install Logstash
+  yum:
+    name: "{{ ls_install_package }}"
+    state: latest
+  become: true
+  tags:
+  - install
+
+- name: Ensure Logstash starts on boot
+  service:
+    name: logstash
+    enabled: "{{ ls_start_on_boot }}"
+  become: true
+
+- name: Configure Logstash
+  include: config.yml
+  tags:
+  - config
+  - configuration
+
+- name: Include security.yml
+  include: security.yml
+  tags:
+  - security
+  notify:
+    - restart logstash
+
+- name: Install Filebeat
+  include: filebeat.yml
+  tags:
+  - filebeat
+  when: False

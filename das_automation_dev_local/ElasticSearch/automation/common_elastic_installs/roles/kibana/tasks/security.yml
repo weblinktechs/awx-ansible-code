@@ -1,0 +1,24 @@
+- name: Create Kibana cert path
+  file:
+    path: "{{ kb_ssl_dest_path }}"
+    state: directory
+    owner: kibana
+    group: kibana
+    mode: 0744
+  become: true
+
+- name: Copy SSL certfiicate
+  copy:
+    src: "{{ kb_ssl_src_certfificate }}"
+    dest: "{{ kb_ssl_dest_certfificate }}"
+  become: true
+  notify:
+    - restart kibana
+
+- name: Copy SSL key
+  copy:
+    src: "{{ kb_ssl_src_key }}"
+    dest: "{{ kb_ssl_dest_key }}"
+  become: true
+  notify:
+    - restart kibana

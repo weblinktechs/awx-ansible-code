@@ -1,0 +1,38 @@
+---
+ls_version: 7.1.1
+ls_cert_src_path: /install/certs
+ls_cert_dest_path: /etc/logstash/certs
+ls_cert_file: elastic-certificates.pem
+ls_cert_src: "{{ls_cert_src_path}}/{{ls_cert_file}}"
+ls_cert_dest: "{{ls_cert_dest_path}}/{{ls_cert_file}}"
+ls_install_package: "logstash-{{ls_version}}*"
+ls_heap_size: 24g
+ls_settings_path: /etc/logstash
+ls_data_root: /data01
+ls_data_path: "{{ ls_data_root }}/logstash/data"
+ls_log_path: "{{ ls_data_root }}/logstash/log"
+filebeat_install_package: "filebeat-{{ ls_version }}"
+filebeat_gz_pattern: /vagrant/gz/*gz
+filebeat_xml_pattern: /vagrant/staging/**/*xml
+filebeat_settings_path: /etc/filebeat
+filebeat_log_path: /data/filebeat/log
+es_ssl: true
+es_xpack_monitoring: true
+es_secure: true
+es_username: logstash_system
+es_password: logstash_system
+ls_settings_ssl_path: "{{ ls_settings_path }}/ssl/"
+ls_start_on_boot: true
+output_es_ssl_ca_src: /tmp/logstash-ssl/es_ca.cer
+output_es_ssl_ca: "{{ ls_settings_ssl_path }}es_ca.cer"
+output_es_protocol: https
+output_es_port: 9200
+output_es_hosts:
+  - "{{ output_es_protocol }}://avu-elserig001.phoenix.local:{{ output_es_port }}"
+  - "{{ output_es_protocol }}://avu-elserig002.phoenix.local:{{ output_es_port }}"
+  - "{{ output_es_protocol }}://avu-elserig003.phoenix.local:{{ output_es_port }}"
+  - "{{ output_es_protocol }}://avu-elserig004.phoenix.local:{{ output_es_port }}"
+  - "{{ output_es_protocol }}://avu-elserig005.phoenix.local:{{ output_es_port }}"
+path_fastxml: /tmp
+path_input_log: /tmp
+path_fixml: /tmp

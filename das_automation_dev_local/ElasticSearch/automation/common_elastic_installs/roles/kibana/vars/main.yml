@@ -1,0 +1,40 @@
+---
+kb_version: 7.1.1
+kb_package: "kibana-{{kb_version}}"
+kb_instances_file: /tmp/instances.yml
+kb_conf: /etc/kibana/kibana.yml
+kb_log_path: /data/kibana/log/
+kb_log_file: "{{ kb_log_path }}kibana.log"
+kb_start_on_boot: true
+
+
+# ============================ Security settings ==============================
+# Whether to enable SSL settings and configure certificates
+kb_ssl: true
+kb_ssl_certname: avu-elserkb001.phoenix.local.pfx
+kb_ssl_key_passphrase: 3edc4rfv
+kb_ssl_src_path: /tmp/kibana-ssl/
+kb_ssl_dest_path: /etc/kibana/ssl/
+kb_ssl_src_certfificate: "{{ kb_ssl_src_path }}{{ kb_ssl_certname }}.crt"
+kb_ssl_dest_certfificate: "{{ kb_ssl_dest_path }}{{ kb_ssl_certname }}.crt"
+kb_ssl_src_key: "{{ kb_ssl_src_path }}{{ kb_ssl_certname }}.key"
+kb_ssl_dest_key: "{{ kb_ssl_dest_path }}{{ kb_ssl_certname }}.key"
+
+# Elasticsearch security settings
+es_secure: true
+es_ssl: true
+es_username: kibana
+es_password: kibana
+
+# =============================================================================
+# Firewall settings
+firewall_ports:
+  Kibana:
+    open_port: "5601"
+    open_protocol: "tcp"
+  SSH:
+    open_port: "22"
+    open_protocol: "tcp"
+  HTTPS:
+    open_port: "443"
+    open_protocol: "tcp"

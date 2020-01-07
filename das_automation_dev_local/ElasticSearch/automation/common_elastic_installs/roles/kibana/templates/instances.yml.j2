@@ -1,0 +1,7 @@
+---
+instances:
+  - name: "{{ ansible_hostname }}" 
+    ip: 
+      - "{{ ansible_eth0.ipv4.address }}"
+    dns: 
+      - "{{ ansible_fqdn }}"

@@ -1,0 +1,65 @@
+---
+- name: Install epel-release
+  yum:
+    name: epel-release
+    state: installed
+  become: true
+
+- name: Install gcc
+  yum:
+    name: gcc
+    state: installed
+  become: true
+
+- name: Install git
+  pip:
+    name: git
+    state: installed
+  become: true
+
+- name: Install Python 3
+  yum:
+    name: python36
+    state: installed
+  become: true
+
+- name: Install Python 3 development tools
+  yum:
+    name: python36-devel
+    state: installed
+  become: true
+
+- name: Install setuptools
+  yum:
+    name: python-setuptools
+    state: installed
+  become: true
+
+- name: Install Pip3
+  yum:
+    name: python36-pip
+    state: installed
+  become: true
+
+- name: Upgrade Pip
+  pip:
+    name: pip
+    extra_args: "--upgrade"
+    executable: /usr/bin/pip3
+  become: true
+
+- name: Symlink pip3 path
+  file:
+    src: /usr/local/bin/pip3
+    dest: /usr/bin/pip3
+    state: link
+  become: true
+
+- name: Install Rally via pip3
+  pip:
+    virtualenv: /tmp/py3
+    virtualenv_command: /usr/bin/python3 -m venv
+    name: esrally
+  become: true
+  tags:
+  - rally

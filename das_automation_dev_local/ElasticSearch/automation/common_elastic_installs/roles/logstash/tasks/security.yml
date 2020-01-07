@@ -1,0 +1,21 @@
+---
+- name: Create logstash cert path
+  file:
+    path: "{{ ls_settings_ssl_path }}"
+    state: directory
+    owner: logstash
+    group: logstash
+    mode: 0744
+  become: true
+  tags:
+  - cert
+  - certs
+  - certificate
+  - certificates
+
+- name: Get Elastic cert
+  command: >
+    echo -n | openssl s_client -connect {{ groups['ingest'][0] }}:9200 | \
+      sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /etc/logstash/ssl/es_ca.cer
+    keytool -import -trustcacerts -keystore /usr/lib/jvm/jre/lib/security/cacerts -storepass changeit -noprompt \
+    -file /etc/logstash/ssl/es_ca.cer

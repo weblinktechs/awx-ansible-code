@@ -1,0 +1,23 @@
+[ingest]
+172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[data]
+172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[master]
+172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[kibana]
+172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[logstash]
+172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+#[beats]
+#172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+#[rally]
+#172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant
+
+[ml]
+172.28.128.3 ansible_ssh_user=vagrant ansible_ssh_pass=vagrant

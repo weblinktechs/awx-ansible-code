@@ -1,0 +1,9 @@
+HOSTS="https://avu-elserig001.phoenix.local:9200,https://avu-elserig002.phoenix.local:9200,https://avu-elserig003.phoenix.local:9200,https://avu-elserig004.phoenix.local:9200,https://avu-elserig005.phoenix.local:9200"
+VERSION="7.1.1"
+USER="elastic"
+PASS="elastic"
+VERIFY_CERTS="false"
+esrally --pipeline=benchmark-only \
+  --distribution-version=${VERSION} \
+  --target-hosts=${HOSTS} \
+  --client-options="basic_auth_user:'${USER}',basic_auth_password:'${PASS}',verify_certs:${VERIFY_CERTS}"

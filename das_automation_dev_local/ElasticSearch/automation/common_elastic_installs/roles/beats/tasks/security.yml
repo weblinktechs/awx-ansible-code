@@ -1,0 +1,25 @@
+---
+- name: Create logstash cert path
+  file:
+    path: "{{ls_cert_dest_path}}"
+    state: directory
+    owner: logstash
+    group: logstash
+    mode: 0744
+  become: true
+  tags:
+  - cert
+  - certs
+  - certificate
+  - certificates
+
+- name: Copy cert to cert path
+  copy:
+    src: "{{ls_cert_src}}"
+    dest: "{{ls_cert_dest}}"
+  become: true
+  tags:
+  - cert
+  - certs
+  - certificate
+  - certificates

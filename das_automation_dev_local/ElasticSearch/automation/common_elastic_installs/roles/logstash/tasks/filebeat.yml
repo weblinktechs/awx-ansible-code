@@ -1,0 +1,26 @@
+---
+- name: Install Filebeat
+  yum:
+    name: "{{ filebeat_install_package }}"
+    state: installed
+  become: true
+  tags:
+  - install
+
+- name: Create log directory
+  file:
+    path: "{{ filebeat_log_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+  become: true
+
+- name: Configure Filebeat
+  template:
+    src: filebeat.yml.j2
+    dest: "{{ filebeat_settings_path }}/filebeat.yml"
+  become: true
+  notify:
+  - Restart Filebeat
+  when: False

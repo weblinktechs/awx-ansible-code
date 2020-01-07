@@ -1,0 +1,33 @@
+---
+- name: Create log directory
+  file:
+    path: "{{ metricbeat_log_path }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0777
+  become: true
+
+- name: Install metricbeat
+  yum:
+    name: "{{ metricbeat_install_package }}"
+    state: installed
+  become: true
+  tags:
+  - install
+
+- name: Configure metricbeat
+  template:
+    src: metricbeat.yml.j2
+    dest: "{{ metricbeat_settings_path }}/metricbeat.yml"
+  become: true
+  notify:
+  - Restart Metricbeat
+
+- name: Ensure Running
+  become: true
+  service:
+    name: metricbeat
+    state: started
+  tags:
+  - start

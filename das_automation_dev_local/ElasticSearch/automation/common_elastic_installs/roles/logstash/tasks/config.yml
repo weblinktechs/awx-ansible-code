@@ -1,0 +1,50 @@
+---
+- name: Create logstash log path
+  file:
+    path: /data/logstash/log
+    state: directory
+    owner: logstash
+    group: logstash
+    mode: 0744
+  become: true
+
+- name: Create logstash data path
+  file:
+    path: "{{ ls_data_path }}"
+    state: directory
+    owner: logstash
+    group: logstash
+    mode: 0744
+  become: true
+
+- name: Create Logstash conf path
+  file:
+    path: "{{ ls_settings_path }}"
+    state: directory
+    owner: logstash
+    group: logstash
+    mode: 0744
+  become: true
+
+- name: Update Logstash.yml
+  template:
+    src: logstash.yml.j2
+    dest: "{{ls_settings_path}}/logstash.yml"
+  become: true
+  notify:
+  - restart logstash
+
+- name: Update jvm.options
+  template:
+    src: jvm.options.j2
+    dest: "{{ls_settings_path}}/jvm.options"
+  become: true
+  notify:
+  - restart logstash
+
+- name: Include filters.yml
+  include: filters.yml
+  notify:
+  - restart logstash
+  tags:
+  - filters

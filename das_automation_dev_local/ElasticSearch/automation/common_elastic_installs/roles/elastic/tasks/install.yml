@@ -1,0 +1,27 @@
+- name: Import RPM key
+  rpm_key:
+    state: present
+    key: "{{es_rpm_repo_key}}"
+  become: true
+  when: es_rpm_repo
+
+- name: Create RPM repository
+  template:
+    src: elasticsearch.repo
+    dest: "{{es_rpm_repo_path}}"
+    owner: root
+    group: root
+  become: true
+  when: es_rpm_repo
+
+- name: Install Elasticsearch
+  yum:
+    name: "{{es_install_package}}"
+    state: latest
+  become: true
+
+- name: Ensure Elasticsearch starts on boot
+  service:
+    name: elasticsearch
+    enabled: "{{ es_start_on_boot }}"
+  become: true

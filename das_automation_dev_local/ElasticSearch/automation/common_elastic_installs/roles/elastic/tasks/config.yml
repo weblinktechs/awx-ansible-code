@@ -1,0 +1,59 @@
+- name: Create Elasticsearch log path
+  file:
+    path: "{{ es_log_path }}"
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+    mode: 0777
+  become: true
+
+- name: Create Elasticsearch data path
+  file:
+    path: "{{ es_data_paths }}"
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+    mode: 0777
+  become: true
+
+- name: Create repo path
+  file:
+    path: "{{es_repo_path}}"
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+    mode: 0744
+  become: true
+
+- name: Create Elasticsearch Service Conf Override
+  file:
+    path: "{{es_serv_conf_path}}"
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+    mode: 0744
+  become: true
+
+- name: Update elasticsearch service conf
+  template:
+    src: override.conf
+    dest: "{{es_serv_conf_path}}/override.conf"
+  become: true
+  notify:
+    - reload systemd
+
+- name: Update elasticsearch.yml
+  template:
+    src: elasticsearch.yml.j2
+    dest: "{{es_conf_dir}}/elasticsearch.yml"
+  become: true
+  notify:
+    - restart elasticsearch
+
+- name: Update jvm.options
+  template:
+    src: jvm.options.j2
+    dest: "{{es_conf_dir}}/jvm.options"
+  become: true
+  notify:
+    - restart elasticsearch

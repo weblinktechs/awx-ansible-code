@@ -1,0 +1,19 @@
+---
+- name: Ensure firewalld is running
+  service:
+    name: firewalld
+    state: started
+  become: true
+  tags:
+  - firewalld
+
+- name: Enable ports
+  firewalld:
+    port: "{{ item.value.open_port }}/{{ item.value.open_protocol }}"
+    permanent: yes
+    state: enabled
+    immediate: true
+  with_dict: "{{ firewall_ports }}"
+  become: true
+  tags:
+  - ports

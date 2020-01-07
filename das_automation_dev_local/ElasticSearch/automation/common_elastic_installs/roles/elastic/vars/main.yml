@@ -1,0 +1,75 @@
+---
+es_version: 7.1.1
+es_cluster_name: search2-uat
+es_install_package: "elasticsearch-{{es_version}}*"
+es_conf_dir: /etc/elasticsearch
+es_analysis_dir: "{{es_conf_dir}}/analysis"
+es_home: /usr/share/elasticsearch
+es_tmp_dir: /tmp
+es_tmp_file: "{{es_tmp_dir}}/elasticsearch.rpm"
+es_serv_conf_path: "/usr/lib/systemd/system/elasticsearch.service.d"
+es_rpm_repo_key: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+es_rpm_repo_path: "/etc/yum.repos.d/elasticsearch.repo"
+es_base_path: /data01/elasticsearch
+es_data_paths: "{{ es_base_path }}/data"
+es_log_path: "{{ es_base_path }}/log"
+es_repo_path: "/bckdrive/tmp"
+es_rhsm_repo_pool_id: 8aef798a6ac63fbb016b4cd2144e27ee
+es_rhms_repo: true
+es_rpm_repo: false
+es_start_on_boot: true
+bootstrap_memory_lock: true
+
+# ============================ Memory =========================================
+es_jvm_heap_size_master: 24g
+es_jvm_heap_size_default: 50g
+
+# ============================ Security settings ==============================
+# Whether to enable SSL settings and configure certificates
+es_ssl: true
+es_ssl_certs:
+  data: avu-elserdn001.phoenix.local.pfx.p12
+  ingest: avu-elserig001.phoenix.local.pfx.p12
+  kibana: avu-elserkb001.phoenix.local.pfx.p12
+  logstash: avu-elserls001.phoenix.local.pfx.p12
+  master: avu-elserms001.phoenix.local.pfx.p12
+es_ssl_cert_src_path: /tmp/elasticsearch-ssl/
+es_ssl_cert_dest_path: /etc/elasticsearch/ssl/
+
+# Whether to enable X-Pack
+es_xpack: true
+es_xpack_monitoring: true
+
+#es_tls_secure_pwd: "3edc4rfv"
+#es_ca_trust_path: /etc/pki/ca-trust/source/anchors
+# ============================ Mail Settings ==================================
+es_xpack_email: false
+es_smtp_secure_pwd: ""
+
+# ============================ Active Directoy Settings =======================
+es_ad_enable: true
+es_ad_secure_pwd: "S*FPt1iV83G$d72E"
+es_ad_enable_native_realm: true
+es_ad_domain_name: phoenix.local
+es_ad_url: ldap://M-DAS-DC01.phoenix.local:389
+es_ad_bind_dn:
+
+# ============================ Installation Options ===========================
+disable_heap_dump: true
+install_rhsm: false
+install_java: false
+
+## FIREWALL STUFF###
+firewall_ports:
+  Elastic_REST:
+    open_port: "9200"
+    open_protocol: "tcp"
+  Elastic_node_communication:
+    open_port: "9300"
+    open_protocol: "tcp"
+  SSH:
+    open_port: "22"
+    open_protocol: "tcp"
+  Https_for_monitor:
+    open_port: "443"
+    open_protocol: "tcp"

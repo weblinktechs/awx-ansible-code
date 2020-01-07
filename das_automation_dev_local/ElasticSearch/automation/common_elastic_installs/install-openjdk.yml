@@ -1,0 +1,18 @@
+---
+- hosts:
+  - master
+  - data
+  - ingest
+  - ml
+  - logstash
+  roles:
+  - openjdk
+  tasks:
+  - name: Get Java version
+    shell: java -version 2>&1
+    register: java_version
+
+  - name: Display Java version
+    debug:
+      var: java_version.stdout_lines
+      verbosity: 1

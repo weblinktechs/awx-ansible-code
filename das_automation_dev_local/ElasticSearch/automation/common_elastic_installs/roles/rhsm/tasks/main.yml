@@ -1,0 +1,6 @@
+---
+- name: Add Redhat Satellite Elasticsearch repo
+  shell: |
+    subscription-manager attach --pool={{ es_rhsm_repo_pool_id }}
+    exit 0
+  become: true

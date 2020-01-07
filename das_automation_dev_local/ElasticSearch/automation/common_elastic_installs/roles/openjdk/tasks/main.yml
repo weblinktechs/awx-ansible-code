@@ -1,0 +1,6 @@
+---
+- name: Install OpenJDK
+  yum:
+    name: "{{openjdk_install_package}}"
+    state: present
+  become: true

@@ -1,0 +1,47 @@
+---
+- name: Firewall settings
+  include: firewall.yml
+  tags:
+  - firewall
+
+- name: Install Kibana
+  yum:
+    name: "{{ kb_package }}"
+    state: installed
+  become: true
+  tags:
+    - install
+
+- name: Make sure Kibana starts on boot
+  service:
+    name: kibana
+    enabled: "{{ kb_start_on_boot }}"
+  become: true
+
+- name: Create Kibana log path
+  file:
+    path: "{{ kb_log_path }}"
+    state: directory
+    owner: kibana
+    group: kibana
+    mode: 0777
+  become: true
+  tags:
+  - config
+
+- name: Update kibana.yml
+  template:
+    src: kibana.yml.j2
+    dest: "{{ kb_conf }}"
+  become: true
+  notify:
+  - restart kibana
+  tags:
+  - config
+
+- name: Kibana security settings
+  include: security.yml
+  tags:
+  - security
+  - config
+  when: kb_ssl | bool

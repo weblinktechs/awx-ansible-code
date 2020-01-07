@@ -1,0 +1,74 @@
+#
+# Certificate-Based Repositories
+# Managed by (rhsm) subscription-manager
+#
+# *** This file is auto-generated.  Changes made here will be over-written. ***
+# *** Use "subscription-manager repo-override --help" if you wish to make changes. ***
+#
+# If this file is empty and this system is subscribed consider
+# a "yum repolist" to refresh available repos
+#
+
+[rhel-7-server-optional-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4113841208824547085.pem
+baseurl = https://sazr-rhelcap01p.phoenix.local/pulp/repos/NYPD/elastic_dev/NextGen_7_6_Composite_View/content/dist/rhel/server/7/$releasever/$basearch/optional/os
+ui_repoid_vars = releasever basearch
+sslverify = 1
+name = Red Hat Enterprise Linux 7 Server - Optional (RPMs)
+sslclientkey = /etc/pki/entitlement/4113841208824547085-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 0
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4113841208824547085.pem
+baseurl = https://sazr-rhelcap01p.phoenix.local/pulp/repos/NYPD/elastic_dev/NextGen_7_6_Composite_View/content/dist/rhel/server/7/$releasever/$basearch/os
+ui_repoid_vars = releasever basearch
+sslverify = 1
+name = Red Hat Enterprise Linux 7 Server (RPMs)
+sslclientkey = /etc/pki/entitlement/4113841208824547085-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-extras-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4113841208824547085.pem
+baseurl = https://sazr-rhelcap01p.phoenix.local/pulp/repos/NYPD/elastic_dev/NextGen_7_6_Composite_View/content/dist/rhel/server/7/7Server/$basearch/extras/os
+ui_repoid_vars = basearch
+sslverify = 1
+name = Red Hat Enterprise Linux 7 Server - Extras (RPMs)
+sslclientkey = /etc/pki/entitlement/4113841208824547085-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 0
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[rhel-7-server-satellite-tools-6.4-rpms]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/4113841208824547085.pem
+baseurl = https://sazr-rhelcap01p.phoenix.local/pulp/repos/NYPD/elastic_dev/NextGen_7_6_Composite_View/content/dist/rhel/server/7/7Server/$basearch/sat-tools/6.4/os
+ui_repoid_vars = basearch
+sslverify = 1
+name = Red Hat Satellite Tools 6.4 (for RHEL 7 Server) (RPMs)
+sslclientkey = /etc/pki/entitlement/4113841208824547085-key.pem
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+enabled = 0
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 1
+
+[NYPD_Elastic_Repository_Elastic_repository]
+metadata_expire = 1
+sslclientcert = /etc/pki/entitlement/7020027651347849501.pem
+baseurl = https://sazr-rhelcap01p.phoenix.local/pulp/repos/NYPD/elastic_dev/NextGen_7_6_Composite_View/custom/Elastic_Repository/Elastic_repository
+sslverify = 1
+name = Elastic repository
+sslclientkey = /etc/pki/entitlement/7020027651347849501-key.pem
+gpgkey = https://sazr-rhelcap01p.phoenix.local/katello/api/v2/repositories/2365/gpg_key_content
+enabled = 1
+sslcacert = /etc/rhsm/ca/katello-server-ca.pem
+gpgcheck = 0

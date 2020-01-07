@@ -1,0 +1,52 @@
+---
+cluster.name: {{ es_cluster_name }}
+cluster.initial_master_nodes: {{ groups['master'][0] }}
+node.name: {{ ansible_fqdn }}
+node.master: {{ ('master' in group_names)|lower }}
+node.data: {{ ('data' in group_names)|lower }}
+node.ingest: {{ ('ingest' in group_names)|lower }}
+network.host: 0.0.0.0
+path.data: {{ es_data_paths }}
+path.logs: {{ es_log_path }}
+discovery.zen.ping.unicast.hosts: {{ groups['master'] | to_yaml }}
+bootstrap.memory_lock: {{ bootstrap_memory_lock }}
+xpack.monitoring.collection.enabled: {{ es_xpack_monitoring }}
+xpack.security.enabled: {{ es_xpack }}
+xpack.security.authc.token.enabled: {{ es_ssl }}
+xpack.security.http.ssl.enabled: {{ es_ssl }}
+{% if es_ssl | bool %}
+xpack.security.http.ssl.keystore.type: PKCS12
+xpack.security.http.ssl.keystore.path: {{ es_ssl_cert_dest_path }}{{ es_ssl_certs[group_names[0]] }}
+xpack.security.http.ssl.truststore.path: {{ es_ssl_cert_dest_path }}{{ es_ssl_certs[group_names[0]] }}
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.keystore.path: {{ es_ssl_cert_dest_path }}{{ es_ssl_certs[group_names[0]] }}
+xpack.security.transport.ssl.verification_mode: none
+xpack.security.transport.ssl.client_authentication: optional
+xpack.http.ssl.truststore.path: /etc/elasticsearch/watcher-truststore.jks
+xpack.http.ssl.truststore.password: kibana
+{% endif %}
+{% if es_ad_enable | bool %}
+xpack.security.authc.realms:
+{% if es_ad_enable_native_realm | bool %}
+  native.native1:
+    enabled: true
+    order: 0
+{% endif %}
+  active_directory.ad1:
+    enabled: true
+    order: 1
+    domain_name: {{ es_ad_domain_name }}
+    url: {{ es_ad_url }}
+    bind_dn: beats_agent@phoenix.local
+{% endif %}
+{% if es_xpack_email | bool %}
+#---- email---
+# xpack.notification.email.account:
+#     exchange_account:
+#         profile: outlook
+#         email_defaults:
+#             from: azg_ElasticAlerts@nypd.org
+#         smtp:
+#             host: mailarray.nypd.finest
+#             port: 25
+{% endif %}

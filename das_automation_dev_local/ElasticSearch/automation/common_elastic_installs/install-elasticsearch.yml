@@ -1,0 +1,16 @@
+---
+- hosts:
+  - a-elstc-dn02.phoenix.local
+ # - master
+ # - data
+ # - ingest
+ # - ml
+  vars:
+    install_java: true
+    install_rhsm: false
+  roles:
+    - role: openjdk
+      when: install_java | bool
+    - role: rhsm
+      when: install_rhsm | bool
+    - role: elastic

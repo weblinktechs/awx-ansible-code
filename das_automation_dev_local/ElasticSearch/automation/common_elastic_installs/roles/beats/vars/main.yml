@@ -1,0 +1,18 @@
+---
+filebeat_version: 7.1.1
+filebeat_install_package: "filebeat-{{ filebeat_version }}"
+filebeat_gz_pattern: /vagrant/gz/*gz
+filebeat_xml_pattern: /vagrant/staging/**/*xml
+filebeat_settings_path: /etc/filebeat
+filebeat_log_path: /data/filebeat/log
+
+metricbeat_version: 7.1.1
+metricbeat_install_package: "metricbeat-{{ metricbeat_version }}"
+metricbeat_settings_path: /etc/metricbeat
+metricbeat_log_path: /data/metricbeat/log
+
+# beats_output_logstash: ["localhost:5044"]
+beats_output: elasticsearch
+beats_output_hosts: ["localhost:9200"]
+beats_monitoring_hosts: ["localhost:9200"]
+beats_monitoring: true

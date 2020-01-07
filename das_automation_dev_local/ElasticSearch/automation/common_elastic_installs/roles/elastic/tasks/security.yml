@@ -1,0 +1,29 @@
+#- name: Create Elasticsearch cert path
+#  file:
+#    path: "{{es_cert_dest_path}}"
+#    state: directory
+#    owner: elasticsearch
+#    group: elasticsearch
+#    mode: 0744
+#  become: true
+
+#- name: Copy node cert to cert path
+#  copy:
+#    src: "{{es_cert_src}}"
+#    dest: "{{es_cert_dest}}"
+#  become: true
+
+#- name: Update role_mapping.yml
+#  template:
+#    src: role_mapping.yml
+#    dest: "{{es_conf_dir}}/role_mapping.yml"
+#  become: true
+#  notify:
+#  - restart elasticsearch
+
+#Elasticsearch Keystore AD ###
+- name: Create AD Password
+  become: yes
+  shell: echo "{{es_ad_secure_pwd}}" | {{es_home}}/bin/elasticsearch-keystore add -x 'xpack.security.authc.realms.active_directory.ad1.secure_bind_password'
+  no_log: true
+

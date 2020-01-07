@@ -1,0 +1,10 @@
+---
+ls_heap_size: 8g
+output_es_hosts:
+  - https://avu-elserdn001.phoenix.local:9200
+es_username: elastic
+es_password: elastic
+
+path_input_log: /data01/logstash/log/gz-local-read-file-mode-completed.log
+path_fastxml: /vagrant/staging/**/*.xml
+path_fixml: /vagrant/staging-historical/**/*.gz

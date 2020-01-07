@@ -1,0 +1,15 @@
+server.port: 5601
+server.host: 0.0.0.0
+logging.dest: {{ kb_log_file }}
+elasticsearch.hosts: ["http{% if es_ssl | bool %}s{% endif %}://{{ groups['master'][0] }}:9200"]
+{% if es_secure | bool %}
+elasticsearch.ssl.verificationMode: none
+elasticsearch.username: {{ es_username }}
+elasticsearch.password: {{ es_password }}
+{% endif %}
+{% if kb_ssl | bool %}
+server.ssl.enabled: true
+server.ssl.key: {{ kb_ssl_dest_key }}
+server.ssl.certificate: {{ kb_ssl_dest_certfificate }}
+server.ssl.keyPassphrase: {{ kb_ssl_key_passphrase }}
+{% endif %}

@@ -1,0 +1,16 @@
+---
+- name: Restart Filebeat
+  become: true
+  service:
+    name: filebeat
+    state: restarted
+  tags:
+  - restart
+
+- name: Restart Metricbeat
+  become: true
+  service:
+    name: metricbeat
+    state: restarted
+  tags:
+  - restart

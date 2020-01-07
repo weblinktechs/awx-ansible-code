@@ -1,0 +1,12 @@
+superuser:
+  - "CN=DT-DASApp,OU=Dynatrace,OU=Production,OU=Servers,OU=Groups,OU=CTB,DC=phoenix,DC=local"
+  - "CN=ELSTC_ServerAdmins,OU=Groups,OU=BigDataProd,OU=BigData,DC=phoenix,DC=local"
+  - "CN=ELSTC_superuser,OU=Groups,OU=BigDataProd,OU=BigData,DC=phoenix,DC=local"
+beats_admin:
+  - "CN=ELSTC_beatsadmin,OU=Groups,OU=BigDataProd,OU=BigData,DC=phoenix,DC=local"
+kibana_dashboard_only_user:
+  - "CN=ELSTC_kibanadashboard,OU=Groups,OU=BigDataProd,OU=BigData,DC=phoenix,DC=local"
+kibana_system:
+  - "CN=ELSTC_kibanauser,OU=Groups,OU=BigDataProd,OU=BigData,DC=phoenix,DC=local"
+logstash_admin:
+  - "CN=ELSTC_logstashadmin,OU=Groups,OU=BigDataProd,OU=BigData,DC=phoenix,DC=local"

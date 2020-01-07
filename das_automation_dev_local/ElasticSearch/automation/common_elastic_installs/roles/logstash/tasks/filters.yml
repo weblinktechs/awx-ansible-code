@@ -1,0 +1,42 @@
+---
+- name: Create ruby filter path
+  file:
+    path:  "{{ls_settings_path}}/filters/"
+    state: directory
+    owner: logstash
+    group: logstash
+    mode: 0777
+  become: true
+
+- name: Add ruby filter
+  template:
+    src: event.rb
+    dest: "{{ls_settings_path}}/filters/event.rb"
+    owner: logstash
+    group: logstash
+    mode: 0777
+  become: true
+  notify:
+  - restart logstash
+
+- name: Update XML parse filter
+  template:
+    src: xmlparse.conf
+    dest: "{{ls_settings_path}}/conf.d/xmlparse.conf"
+    owner: logstash
+    group: logstash
+    mode: 0777
+  become: true
+  notify:
+  - restart logstash
+
+- name: Update main Logstash filter
+  template:
+    src: logstash.conf
+    dest: "{{ls_settings_path}}/conf.d/logstash.conf"
+    owner: logstash
+    group: logstash
+    mode: 0777
+  become: true
+  notify:
+    - restart logstash
