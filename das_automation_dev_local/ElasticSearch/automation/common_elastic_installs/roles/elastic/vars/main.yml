@@ -1,5 +1,5 @@
 ---
-es_version: 7.1.1
+es_version: 7.5.1
 es_cluster_name: search2-uat
 es_install_package: "elasticsearch-{{es_version}}*"
 es_conf_dir: /etc/elasticsearch

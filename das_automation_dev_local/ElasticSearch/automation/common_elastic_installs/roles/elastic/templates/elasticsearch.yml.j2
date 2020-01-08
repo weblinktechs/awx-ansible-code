@@ -1,14 +1,12 @@
 ---
 cluster.name: {{ es_cluster_name }}
-cluster.initial_master_nodes: {{ groups['master'][0] }}
+
 node.name: {{ ansible_fqdn }}
-node.master: {{ ('master' in group_names)|lower }}
-node.data: {{ ('data' in group_names)|lower }}
-node.ingest: {{ ('ingest' in group_names)|lower }}
+
 network.host: 0.0.0.0
 path.data: {{ es_data_paths }}
 path.logs: {{ es_log_path }}
-discovery.zen.ping.unicast.hosts: {{ groups['master'] | to_yaml }}
+
 bootstrap.memory_lock: {{ bootstrap_memory_lock }}
 xpack.monitoring.collection.enabled: {{ es_xpack_monitoring }}
 xpack.security.enabled: {{ es_xpack }}

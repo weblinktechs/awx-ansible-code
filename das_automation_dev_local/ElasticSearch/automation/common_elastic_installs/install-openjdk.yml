@@ -12,8 +12,4 @@
     debug:
       var: java_version.stdout_lines
       verbosity: 1
-  - name: Add repository Elastic repository for 7.x packages
-    yum_repository:
-      name: epel
-      description: Elastic repository for 7.x packages
-      baseurl: https://packages.elastic.co/GPG-KEY-elasticsearch
+ 

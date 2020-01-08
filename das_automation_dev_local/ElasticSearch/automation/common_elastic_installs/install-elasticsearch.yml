@@ -1,6 +1,6 @@
 ---
 - hosts:
-  - a-elstc-dn02.phoenix.local
+  - all
  # - master
  # - data
  # - ingest
