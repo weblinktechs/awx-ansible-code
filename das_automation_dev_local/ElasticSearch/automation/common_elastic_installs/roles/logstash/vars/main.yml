@@ -1,5 +1,5 @@
 ---
-ls_version: 7.1.1
+ls_version: 7.5.1
 ls_cert_src_path: /install/certs
 ls_cert_dest_path: /etc/logstash/certs
 ls_cert_file: elastic-certificates.pem
