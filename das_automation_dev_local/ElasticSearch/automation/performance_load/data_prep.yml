@@ -1,4 +1,5 @@
 ---
+
 - hosts: "logstash"
   roles:
   - start_performance_run
