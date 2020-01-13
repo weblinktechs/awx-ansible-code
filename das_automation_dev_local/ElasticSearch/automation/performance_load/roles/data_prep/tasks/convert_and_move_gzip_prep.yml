@@ -2,17 +2,20 @@
 # tasks file for converting and moving data_pipeline
 - name: Create target folder for holding json document
   file:
-    path: "{{common_data_path}}/payload_data/{{data_type}}/json"
+    path: "{{common_data_path}}/payload_data/{{item}}/json"
     state: directory
+  with_items:
+    - lpr
+    - rtcc
   tags: create_json_tagets 
 
-- name: Ansible copy files remote to remote
-  shell: 'gunzip /tmp/ALL_LPR_DATA/*.gz'
+- name: Uncompress LRP / RTCC data and prep for move
+  shell: 'gunzip {{common_data_pre_copy_loc}}/*.gz'
   run_once: yes
   delegate_to: "{{inventory_hostname}}"
 
-- name: Ansible copy files remote to remote
-  shell: 'cp -r /tmp/ALL_LPR_DATA/*Set* /data01/lpr/json'
+- name: Copy the Json files to traget at {{common_json_output_target}}
+  shell: 'cp -r {{common_data_pre_copy_loc}}/{{file_match}} {{common_json_output_target}}'
   delegate_to: "{{inventory_hostname}}"
 
 
