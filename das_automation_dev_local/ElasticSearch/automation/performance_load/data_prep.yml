@@ -2,5 +2,5 @@
 
 - hosts: "logstash"
   roles:
-  - start_performance_run
+  - data_prep
   tags : performance
