@@ -5,7 +5,7 @@
   file:
     path: "{{common_destination_target_dir}}"
     state: directory
-    mode: '0755'
+    mode: '0777'
   become: true
   tags:
   - create_directories

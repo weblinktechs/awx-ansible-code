@@ -1,0 +1,35 @@
+---
+# setup logstash configuration file
+
+- name: create directories for non-prod if they don't exist
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ls_user}}"
+    group: "{{ls_group}}"
+  with_items:
+    - /etc/logstash/{{inventory_hostname}}/config/lpr
+    - /etc/logstash/{{inventory_hostname}}/config/rtcc
+    - /var/lib/logstash/dead_letter_queue
+  tags: [prod-perf-load] 
+
+- name: Create based pipline for each pipline
+  template:
+    src: pipelines.yml.j2
+    dest: "/etc/logstash/{{ item }}"
+    owner: "{{ls_user}}"
+    group: "{{ls_group}}"
+    mode: 0644
+  with_items:
+    - pipelines.yml
+  tags: create_pipline
+  become: true
+
+- name: Generate logstash configuration file 
+  template:
+    src: common_performance_load.conf.j2
+    dest: "/etc/logstash/{{inventory_hostname}}/config/{{data_type}}/common_performance_load.conf"
+    mode: '0755'
+  become: true
+
+  

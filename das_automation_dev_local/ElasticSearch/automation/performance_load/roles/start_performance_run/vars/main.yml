@@ -1,2 +1,12 @@
 ---
 # vars file for start_performance_run
+
+ls_user: "logstash"
+ls_group: "logstash"
+data_type: "lpr"
+common_data_path_json_based: "/data01/prep_data"
+performance_index: "performance-run"
+
+## ES data nodes for logstash
+env_es_datanodes_logstash: '["vpp-elserig001.phoenix.local:9200","vpp-elserig002.phoenix.local:9200","vpp-elserig003.phoenix.local:9200","vpp-elserig004.phoenix.local:9200","vpp-elserig005.phoenix.local:9200"
+                            ,"vpp-elserdn001.phoenix.local:9200","vpp-elserdn002.phoenix.local:9200","vpp-elserdn003.phoenix.local:9200","vpp-elserdn004.phoenix.local:9200","vpp-elserdn005.phoenix.local:9200"]'

@@ -1,0 +1,12 @@
+[all:vars]
+ansible_connection=ssh
+ansible_ssh_user=osboxes
+ansible_ssh_pass=osboxes.org
+ansible_sudo_pass=osboxes.org
+ansible_become_pass=osboxes.org
+
+[all]
+192.168.0.137
+
+[lab]
+192.168.0.137

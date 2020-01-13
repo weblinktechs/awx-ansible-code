@@ -1,0 +1,6 @@
+---
+
+- hosts: "common-data-source"
+  roles:
+  - start_performance_run
+  tags : performance

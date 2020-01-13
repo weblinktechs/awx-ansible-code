@@ -17,7 +17,7 @@
   synchronize:
     mode: pull 
     src: "{{common_data_source_dir}}"
-    dest: "{{common_destination_target_dir}}"
+    dest: "/tmp"
     verify_host: no
     recursive: yes
   delegate_to: "{{targets}}" 

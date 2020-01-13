@@ -1,0 +1,5 @@
+---
+# vars file for data_prep
+common_data_pre_copy_loc: "/tmp"
+gzip_taget_loc: "ALL_LPR_DATA"
+

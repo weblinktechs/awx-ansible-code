@@ -1,0 +1,34 @@
+---
+# tasks file for converting and moving data_pipeline
+- name: Create target folder for holding json document
+  file:
+    path: "{{common_data_path}}/payload_data/{{data_type}}/json"
+    state: directory
+  tags: create_json_tagets 
+
+- name: Ansible copy files remote to remote
+  shell: 'gunzip /tmp/ALL_LPR_DATA/*.gz'
+  run_once: yes
+  delegate_to: "{{inventory_hostname}}"
+
+- name: Ansible copy files remote to remote
+  shell: 'cp -r /tmp/ALL_LPR_DATA/*Set* /data01/lpr/json'
+  delegate_to: "{{inventory_hostname}}"
+
+
+# - name: List dataset before uncommpress
+#   find:
+#     path: "{{common_data_pre_copy_loc}}/{{gzip_taget_loc}}"
+#     pattern: '*.gz'
+#     depth: 3
+#   register: "compressed_json_files"
+#   tags: list_gzips_by_taget 
+
+# - name: Unarchive a file that is already on the remote machine and move to target location
+#   unarchive:
+#     src: "{{item}}"
+#     dest: "{{common_data_path}}/{{data_type}}/json"
+#     remote_src: yes  
+#   with_items: "{{ compressed_json_files.path }}"
+#   tags: decompress_gzips_by_tagets  
+

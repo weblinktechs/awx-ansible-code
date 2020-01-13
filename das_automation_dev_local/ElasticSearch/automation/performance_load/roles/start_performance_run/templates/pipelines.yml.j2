@@ -1,0 +1,9 @@
+ - pipeline.id: {{data_type}}
+   pipeline.workers: 3
+   pipeline.batch.size: 300
+   path.config: "/etc/logstash/{{inventory_hostname}}/config/{{data_type}}/*.conf"
+
+
+# - pipeline.id: another_test
+#   queue.type: persisted
+#   path.config: "/tmp/logstash/*.config"

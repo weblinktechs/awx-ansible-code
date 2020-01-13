@@ -1,0 +1,5 @@
+---
+- hosts: "lab"
+  roles:
+  - common
+  tags : do_tests

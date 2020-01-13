@@ -1,2 +1,6 @@
 ---
 # tasks file for start_performance_run
+
+- name: Do Logstash Prep steps
+  include: prep_logstash_configurataion.yml
+  tags: do_ingestion_prep

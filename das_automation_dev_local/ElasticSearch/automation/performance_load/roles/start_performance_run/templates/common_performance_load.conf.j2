@@ -1,0 +1,24 @@
+input {
+  file {
+    codec => multiline
+    {
+        pattern => '^\{'
+        negate => true
+        what => previous                
+    }
+    path => "{{common_data_path_json_based}}"
+    sincedb_path => "/tmp/current_run/sincedb-common-{{ range(1, 510000) | random }}.pix"
+    start_position => "beginning"
+  }
+}
+
+
+output {
+   elasticsearch {
+     codec => json
+     index => "{{performance_index}}-"
+     hosts => {{env_es_datanodes_logstash}}
+  }
+   stdout { codec => json }
+}
+
