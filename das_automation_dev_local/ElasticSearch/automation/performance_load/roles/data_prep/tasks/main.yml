@@ -1,2 +1,6 @@
 ---
 # tasks file for data_prep
+
+- name: Do Data Conversion uncompression and move for load prep
+  include: convert_and_move_gzip_prep
+  tags: do_data_conversion_and_move

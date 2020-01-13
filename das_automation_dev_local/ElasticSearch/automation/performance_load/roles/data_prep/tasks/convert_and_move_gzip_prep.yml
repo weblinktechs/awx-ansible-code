@@ -13,10 +13,13 @@
   shell: 'gunzip {{common_data_pre_copy_loc}}/*.gz'
   run_once: yes
   delegate_to: "{{inventory_hostname}}"
+  tags: uncompress_gzs
+
 
 - name: Copy the Json files to traget at {{common_json_output_target}}
   shell: 'cp -r {{common_data_pre_copy_loc}}/{{file_match}} {{common_json_output_target}}'
   delegate_to: "{{inventory_hostname}}"
+  tags: copy_json_to_targets
 
 
 # - name: List dataset before uncommpress
