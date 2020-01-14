@@ -2,20 +2,20 @@
 # tasks file for converting and moving data_pipeline
 - name: Create target folder for holding json document
   file:
-    path: "{{common_data_path}}/payload_data/{{item}}/json"
+    path: "{{common_data_path}}/payload_data/{{item}}/json/"
     state: directory
+  become: true 
   with_items:
     - lpr
     - rtcc
   tags: create_json_tagets
-  become: true 
 
 - name: Uncompress LRP / RTCC data and prep for move
   shell: 'gunzip {{common_data_pre_copy_loc}}/*.gz'
   run_once: yes
+  become: true
   delegate_to: "{{inventory_hostname}}"
   tags: uncompress_gzs
-  become: true 
 
 
 - name: Copy the Json files to traget at {{common_json_output_target}}
@@ -24,6 +24,15 @@
   tags: copy_json_to_targets
   become: true 
 
+- name: Clean artifact path
+  file:
+    state: absent
+    path: "{{common_data_path}}/payload_data/{{item}}/json/"
+  with_items:
+    - lpr
+    - rtcc
+  tags: clear_json_files
+  become: true 
 
 # - name: List dataset before uncommpress
 #   find:
