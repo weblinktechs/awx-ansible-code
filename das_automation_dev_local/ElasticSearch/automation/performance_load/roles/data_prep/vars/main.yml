@@ -4,4 +4,5 @@ gzip_taget_loc: "ALL_LPR_DATA"
 common_data_pre_copy_loc: /tmp/{{gzip_taget_loc}}
 file_match: "*Set*"
 common_json_output_target: /data01/lpr/json
+common_data_path: /data01
 
