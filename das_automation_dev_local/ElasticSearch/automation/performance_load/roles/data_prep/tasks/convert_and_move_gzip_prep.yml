@@ -7,19 +7,22 @@
   with_items:
     - lpr
     - rtcc
-  tags: create_json_tagets 
+  tags: create_json_tagets
+  become: true 
 
 - name: Uncompress LRP / RTCC data and prep for move
   shell: 'gunzip {{common_data_pre_copy_loc}}/*.gz'
   run_once: yes
   delegate_to: "{{inventory_hostname}}"
   tags: uncompress_gzs
+  become: true 
 
 
 - name: Copy the Json files to traget at {{common_json_output_target}}
   shell: 'cp -r {{common_data_pre_copy_loc}}/{{file_match}} {{common_json_output_target}}'
   delegate_to: "{{inventory_hostname}}"
   tags: copy_json_to_targets
+  become: true 
 
 
 # - name: List dataset before uncommpress

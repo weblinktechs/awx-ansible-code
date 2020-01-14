@@ -11,7 +11,8 @@
     - /etc/logstash/{{inventory_hostname}}/config/lpr
     - /etc/logstash/{{inventory_hostname}}/config/rtcc
     - /var/lib/logstash/dead_letter_queue
-  tags: [prod-perf-load] 
+  tags: [prod-perf-load]
+  become: true  
 
 - name: Create based pipline for each pipline
   template:
